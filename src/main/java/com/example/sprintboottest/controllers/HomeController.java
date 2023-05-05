@@ -1,4 +1,4 @@
-package com.example.sprintboottest;
+package com.example.sprintboottest.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
