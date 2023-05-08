@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 
 @Controller
@@ -46,4 +45,41 @@ public class JobController {
             return exception.getMessage();
         }
     }
+
+    @GetMapping("/jobs/edit/{id}")
+    public String edit(@PathVariable("id") Long id, Model model)
+    {
+        Job job = this.jobRepository.findById(id).get();
+        model.addAttribute("job", job);
+        return "edit";
+    }
+
+    @PostMapping("/jobs/update/{id}")
+    public String update(@PathVariable("id") Long id, @Valid Job job, BindingResult result, Model model)
+    {
+        try {
+            if (result.hasErrors()) {
+                return "edit";
+            }
+
+            this.jobRepository.save(job);
+            model.addAttribute("jobs", this.jobRepository.findAll());
+            return "redirect:/jobs/";
+        } catch (Exception exception) {
+            return exception.getMessage();
+        }
+    }
+
+    @GetMapping("/jobs/delete/{id}")
+    public String delete(@PathVariable("id") Long id, Model model)
+    {
+        try {
+            this.jobRepository.deleteById(id);
+            model.addAttribute("jobs", this.jobRepository.findAll());
+            return "redirect:/jobs/";
+        } catch (Exception exception) {
+            return exception.getMessage();
+        }
+    }
+
 }

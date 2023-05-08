@@ -1,2 +1,4 @@
 .header{padding-bottom: 15px;}
 .txtAreaForm{resize: none !important;}
+.iconPencil .bi.bi-pencil{color: #20c997;}
+.iconTrash .bi.bi-trash{color: #f00;}

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Lista dos Empregos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link th:href="@{/css/app.css}" rel="stylesheet" />
 </head>
 <body>
@@ -47,6 +48,8 @@
                 <th scope="col">Título</th>
                 <th scope="col">Empresa</th>
                 <th scope="col">Descrição</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Excluir</th>
             </tr>
             </thead>
             <tbody>
@@ -54,6 +57,8 @@
                 <th th:text="${job.title}" scope="row"></th>
                 <td th:text="${job.company}"></td>
                 <td th:text="${job.description}"></td>
+                <td class="iconPencil"><a th:href="@{/jobs/edit/{id}(id=${job.id})}"><i class="bi bi-pencil"></i></a></td>
+                <td class="iconTrash"><a th:href="@{/jobs/delete/{id}(id=${job.id})}"><i class="bi bi-trash"></i></a></td>
             </tr>
             </tbody>
         </table>
